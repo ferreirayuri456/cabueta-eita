@@ -1,5 +1,7 @@
 package br.com.cabueta.entity.request;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,8 +15,13 @@ import java.time.LocalDateTime;
 @Builder
 public class CabuetaClientRequest {
 
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String cpfCnpj;
+
+    @Email
     private String email;
     private String password;
     private LocalDateTime createdAt;
