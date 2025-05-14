@@ -2,6 +2,7 @@ package br.com.cabueta.service;
 
 
 import br.com.cabueta.entity.CabuetaClient;
+import br.com.cabueta.entity.response.CabuetaClientResponse;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,9 @@ import java.util.Optional;
 
 public interface CabuetaService {
 
-    CabuetaClient save(CabuetaClient cabuetaClient);
+    CabuetaClientResponse save(CabuetaClient cabuetaClient);
     Optional<CabuetaClient> findById(ObjectId id);
-    List<CabuetaClient> findAll();
+    List<CabuetaClientResponse> findAll();
     void delete(String cpfCnpj);
 
 }

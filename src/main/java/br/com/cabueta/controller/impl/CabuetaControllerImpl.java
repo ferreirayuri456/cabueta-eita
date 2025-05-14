@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/clients")
@@ -45,8 +46,8 @@ public class CabuetaControllerImpl implements CabuetaController {
     }
 
     @Override
-    public Iterable<CabuetaClient> findAll() {
-        return cabuetaService.findAll();
+    public ResponseEntity<List<CabuetaClientResponse>> findAll() {
+        return ResponseEntity.ok(cabuetaService.findAll());
     }
 
     @Override
