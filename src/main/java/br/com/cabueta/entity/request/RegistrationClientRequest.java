@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CabuetaClientRequest {
+public class RegistrationClientRequest {
 
     @NotBlank
     private String name;

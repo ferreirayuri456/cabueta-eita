@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @Data
 @Document(collection = "clients")
-public class CabuetaClient {
+public class RegistrationClient {
 
     @Id
     private ObjectId id;

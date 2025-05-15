@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CabuetaClientResponse {
+public class RegistrationClientResponse {
 
 
     private String name;

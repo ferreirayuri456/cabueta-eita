@@ -1,10 +1,10 @@
 package br.com.cabueta.controller.impl;
 
-import br.com.cabueta.controller.CabuetaController;
-import br.com.cabueta.entity.CabuetaClient;
-import br.com.cabueta.entity.request.CabuetaClientRequest;
-import br.com.cabueta.entity.response.CabuetaClientResponse;
-import br.com.cabueta.service.CabuetaService;
+import br.com.cabueta.controller.RegistrationClientController;
+import br.com.cabueta.entity.RegistrationClient;
+import br.com.cabueta.entity.request.RegistrationClientRequest;
+import br.com.cabueta.entity.response.RegistrationClientResponse;
+import br.com.cabueta.service.RegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +20,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/clients")
 @RequiredArgsConstructor
-public class CabuetaControllerImpl implements CabuetaController {
+public class RegistrationClientControllerImpl implements RegistrationClientController {
 
     @Autowired
-    private final CabuetaService cabuetaService;
+    private final RegistrationService cadastroService;
 
     @Override
-    public ResponseEntity<CabuetaClient> save(CabuetaClientRequest request) {
+    public ResponseEntity<RegistrationClient> save(RegistrationClientRequest request) {
 
-        CabuetaClient cabuetaClient = CabuetaClient.builder()
+        RegistrationClient cadastroClient = RegistrationClient.builder()
                 .name(request.getName())
                 .email(request.getEmail())
                 .cpfCnpj(request.getCpfCnpj())
@@ -36,22 +36,22 @@ public class CabuetaControllerImpl implements CabuetaController {
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();
-        cabuetaService.save(cabuetaClient);
+        cadastroService.save(cadastroClient);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @Override
-    public Optional<CabuetaClient> findById(ObjectId id) {
-        return cabuetaService.findById(id);
+    public Optional<RegistrationClient> findById(ObjectId id) {
+        return cadastroService.findById(id);
     }
 
     @Override
-    public ResponseEntity<List<CabuetaClientResponse>> findAll() {
-        return ResponseEntity.ok(cabuetaService.findAll());
+    public ResponseEntity<List<RegistrationClientResponse>> findAll() {
+        return ResponseEntity.ok(cadastroService.findAll());
     }
 
     @Override
     public void deleteClient(String cpfCnpj) {
-        cabuetaService.delete(cpfCnpj);
+        cadastroService.delete(cpfCnpj);
     }
 }
