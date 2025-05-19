@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +19,7 @@ public class ReportClient {
 
     @Id
     private ObjectId id;
+    private long clientId;
     private String description;
     private String reportId;
     private String location;

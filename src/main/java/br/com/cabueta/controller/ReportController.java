@@ -17,5 +17,6 @@ public interface ReportController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     ResponseEntity<ReportResponse> save(@ModelAttribute ReportRequest request) throws IOException;
     @GetMapping("/{id}")
-    ResponseEntity<ReportResponse> findById(@PathVariable String id);
+    ResponseEntity<List<ReportResponse>> findByClientId(@PathVariable long id);
+
 }

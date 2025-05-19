@@ -12,6 +12,7 @@ import java.util.List;
 public interface ReportRepository extends MongoRepository<ReportClient, ObjectId> {
 
     List<ReportResponse> findByReportId(String clientId);
+    List<ReportClient> findByClientId(long id);
 
 
 }

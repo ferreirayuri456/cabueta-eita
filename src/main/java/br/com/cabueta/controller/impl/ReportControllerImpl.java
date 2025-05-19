@@ -4,6 +4,7 @@ import br.com.cabueta.controller.ReportController;
 import br.com.cabueta.entity.ReportClient;
 import br.com.cabueta.entity.request.ReportRequest;
 import br.com.cabueta.entity.response.ReportResponse;
+import br.com.cabueta.mapper.ReportMapper;
 import br.com.cabueta.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -20,6 +21,7 @@ import java.util.List;
 public class ReportControllerImpl implements ReportController {
 
     private final ReportService reportService;
+    private final ReportMapper reportMapper;
 
     @Override
     public ResponseEntity<ReportResponse> save(ReportRequest request) throws IOException {
@@ -27,9 +29,11 @@ public class ReportControllerImpl implements ReportController {
     }
 
     @Override
-    public ResponseEntity<ReportResponse> findById(String id) {
-        return reportService.findById(id).stream()
-                .map(ResponseEntity::ok)
-                .findAny().orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<List<ReportResponse>> findByClientId(long id) {
+        List<ReportClient> reports = reportService.findAllByClientId(id);
+        List<ReportResponse> responseList = reports.stream()
+                .map(reportMapper::toResponse)
+                .toList();
+        return ResponseEntity.ok(responseList);
     }
 }

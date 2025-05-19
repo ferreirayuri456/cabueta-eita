@@ -6,15 +6,14 @@ import br.com.cabueta.entity.response.ReportResponse;
 import br.com.cabueta.mapper.ReportMapper;
 import br.com.cabueta.repository.ReportRepository;
 import br.com.cabueta.service.ReportService;
+import br.com.cabueta.service.SequenceGeneratorService;
 import br.com.cabueta.service.StorageService;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -24,6 +23,7 @@ public class ReportServiceImpl implements ReportService {
     private final ReportMapper reportMapper;
     private final ReportRepository reportRepository;
     private final StorageService storageService;
+    private final SequenceGeneratorService sequenceGeneratorService;
 
 
     @Override
@@ -37,6 +37,7 @@ public class ReportServiceImpl implements ReportService {
         }
 
         client.setReportId(generateRandomDEN());
+        client.setClientId(sequenceGeneratorService.generateSequence(request.getClientId()));
         ReportClient reportClient = reportRepository.save(client);
 
         return reportMapper.toResponse(reportClient);
@@ -45,6 +46,11 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<ReportResponse> findById(String id) {
         return reportRepository.findByReportId(id);
+    }
+
+    @Override
+    public List<ReportClient> findAllByClientId(long id) {
+        return reportRepository.findByClientId(id);
     }
 
     private String generateRandomDEN() {
