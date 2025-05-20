@@ -44,11 +44,6 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public List<ReportResponse> findById(String id) {
-        return reportRepository.findByReportId(id);
-    }
-
-    @Override
     public List<ReportClient> findAllByClientId(long id) {
         return reportRepository.findByClientId(id);
     }
