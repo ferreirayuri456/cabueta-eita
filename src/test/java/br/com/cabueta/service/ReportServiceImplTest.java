@@ -42,10 +42,11 @@ public class ReportServiceImplTest {
     void testSave() throws IOException {
         // Arrange (prepara os dados)
         ReportRequest request = ReportRequest.builder()
-                .imageUrl(new MockMultipartFile("image", new byte[0])) // se o seu objeto tiver image
+                .imageUrl(new MockMultipartFile("image", new byte[0])) // se o seu objeto tiver imagem
                 .build();
 
-        ReportClient client = ReportClient.builder().build();
+        ReportClient client = ReportClient.builder()
+                .build();
 
         when(reportMapper.toEntity(request)).thenReturn(client);
         when(storageService.uploadFile(any())).thenReturn("https://fake-url.com/image.jpg");
