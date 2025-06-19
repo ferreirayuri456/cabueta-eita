@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface RegistrationClientController {
@@ -24,4 +25,7 @@ public interface RegistrationClientController {
 
     @DeleteMapping("/{id}")
     void deleteClient(@PathVariable String cpfCnpj);
+
+    @PostMapping("/generate")
+    ResponseEntity<Map<String, String>> generateClientId();
 }

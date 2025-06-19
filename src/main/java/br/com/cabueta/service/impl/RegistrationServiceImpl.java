@@ -1,6 +1,7 @@
 package br.com.cabueta.service.impl;
 
 import br.com.cabueta.entity.RegistrationClient;
+import br.com.cabueta.entity.request.LoginRequest;
 import br.com.cabueta.entity.response.RegistrationClientResponse;
 import br.com.cabueta.mapper.ClientMapper;
 import br.com.cabueta.repository.RegistrationRepository;
@@ -53,5 +54,18 @@ public class RegistrationServiceImpl implements RegistrationService {
             cadastroRepository.delete(RegistrationClient.builder().cpfCnpj(cpfCnpj).build());
         }
 
+    }
+
+    @Override
+    public RegistrationClient findByClientId(LoginRequest loginRequest) {
+        Optional<RegistrationClientResponse> optionalClient = cadastroRepository.findByCpfCnpj(loginRequest.getCpfCnpj());
+
+        RegistrationClientResponse client = optionalClient.orElseGet(() -> {
+            RegistrationClientResponse newClient = new RegistrationClientResponse();
+            newClient.setCpfCnpj(loginRequest.getCpfCnpj());
+
+            return newClient;
+        });
+        return cadastroRepository.save(clientMapper.toEntity(client));
     }
 }

@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/clients")
@@ -53,5 +52,16 @@ public class RegistrationClientControllerImpl implements RegistrationClientContr
     @Override
     public void deleteClient(String cpfCnpj) {
         cadastroService.delete(cpfCnpj);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, String>> generateClientId() {
+
+        String clientId = UUID.randomUUID().toString();
+
+        Map<String, String> response = new HashMap<>();
+        response.put("clientId", clientId);
+
+        return ResponseEntity.ok(response);
     }
 }

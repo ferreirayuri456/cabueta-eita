@@ -19,6 +19,8 @@ public class ReportRequest {
     private String description;
     @NotBlank
     private String location;
+    private Double latitude;
+    private Double longitude;
     private long clientId;
     private MultipartFile imageUrl;
     private LocalDateTime createdAt;

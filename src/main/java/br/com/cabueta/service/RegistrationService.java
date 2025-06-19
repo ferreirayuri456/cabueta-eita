@@ -2,6 +2,7 @@ package br.com.cabueta.service;
 
 
 import br.com.cabueta.entity.RegistrationClient;
+import br.com.cabueta.entity.request.LoginRequest;
 import br.com.cabueta.entity.response.RegistrationClientResponse;
 import org.bson.types.ObjectId;
 
@@ -15,5 +16,6 @@ public interface RegistrationService {
     Optional<RegistrationClient> findById(ObjectId id);
     List<RegistrationClientResponse> findAll();
     void delete(String cpfCnpj);
+    RegistrationClient findByClientId(LoginRequest clientId);
 
 }

@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 public class ReportResponse {
     private String description;
     private String location;
+    private Double latitude;
+    private Double longitude;
     private String imageUrl;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

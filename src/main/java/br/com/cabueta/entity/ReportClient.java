@@ -22,6 +22,8 @@ public class ReportClient {
     private long clientId;
     private String description;
     private String reportId;
+    private Double latitude;
+    private Double longitude;
     private String location;
     private String imageUrl;
     private LocalDateTime createdAt;

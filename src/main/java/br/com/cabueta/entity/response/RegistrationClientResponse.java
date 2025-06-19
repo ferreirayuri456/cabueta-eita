@@ -1,6 +1,8 @@
 package br.com.cabueta.entity.response;
 
+import br.com.cabueta.entity.RegistrationClient;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +12,8 @@ import java.time.LocalDateTime;
 public class RegistrationClientResponse {
 
 
-    private String name;
+    @Field("name")
+    private String clientName;
     private String cpfCnpj;
     private String email;
     private String password;

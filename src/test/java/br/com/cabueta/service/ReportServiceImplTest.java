@@ -2,6 +2,7 @@ package br.com.cabueta.service;
 
 import br.com.cabueta.entity.ReportClient;
 import br.com.cabueta.entity.request.ReportRequest;
+import br.com.cabueta.entity.response.ReportResponse;
 import br.com.cabueta.mapper.ReportMapper;
 import br.com.cabueta.repository.ReportRepository;
 import br.com.cabueta.service.impl.ReportServiceImpl;
@@ -10,9 +11,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -37,20 +40,24 @@ public class ReportServiceImplTest {
 
     @Test
     void testSave() throws IOException {
+        // Arrange (prepara os dados)
         ReportRequest request = ReportRequest.builder()
+                .imageUrl(new MockMultipartFile("image", new byte[0])) // se o seu objeto tiver image
                 .build();
 
-        ReportClient client = reportMapper.toEntity(request);
+        ReportClient client = ReportClient.builder().build();
 
-        when(storageService.uploadFile(any())).thenReturn("");
-        when(sequenceGeneratorService.generateSequence(any())).thenReturn(1L);
+        when(reportMapper.toEntity(request)).thenReturn(client);
+        when(storageService.uploadFile(any())).thenReturn("https://fake-url.com/image.jpg");
         when(reportRepository.save(any())).thenReturn(client);
 
+        // Act (executa o método que você quer testar)
+        ReportResponse savedClient = reportService.save(request);
+
+        // Assert / Verify (verifica que os mocks foram chamados corretamente)
         verify(reportMapper, times(1)).toEntity(request);
         verify(storageService, times(1)).uploadFile(any());
-
-
-
-
+        verify(reportRepository, times(1)).save(any());
     }
+
 }
