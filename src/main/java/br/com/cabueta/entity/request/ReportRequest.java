@@ -1,11 +1,11 @@
 package br.com.cabueta.entity.request;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -13,17 +13,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CabuetaClientRequest {
+public class ReportRequest {
 
     @NotBlank
-    private String name;
-
+    private String description;
     @NotBlank
-    private String cpfCnpj;
-
-    @Email
-    private String email;
-    private String password;
+    private String location;
+    private Double latitude;
+    private Double longitude;
+    private long clientId;
+    private MultipartFile imageUrl;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

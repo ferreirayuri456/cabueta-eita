@@ -7,12 +7,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Data
 @Document(collection = "clients")
-public class CabuetaClient {
+public class RegistrationClient {
 
     @Id
     private ObjectId id;
@@ -22,5 +23,4 @@ public class CabuetaClient {
     private String password;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
 }
